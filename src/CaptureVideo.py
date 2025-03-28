@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*- # Ajout pour encodage si nécessaire
+# -*- coding: utf-8 -*-
 import cv2
 import mediapipe as mp
 import numpy as np
@@ -11,10 +11,11 @@ import time
 import csv
 from collections import deque, Counter
 from tqdm import tqdm
+import matplotlib.pyplot as plt # <<< Pour le graphique
 
 # --- Configuration du logging ---
-# Garder DEBUG pour voir tous les messages lors du test du timeout
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - [%(threadName)s] - %(message)s')
+# Remettre à INFO pour moins de verbosité une fois le problème de deadlock résolu
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - [%(threadName)s] - %(message)s')
 
 # --- ANSI escape codes for colors ---
 class Colors:
@@ -22,7 +23,7 @@ class Colors:
     BRIGHT_YELLOW = '\x1b[93m'
     BRIGHT_GREEN = '\x1b[92m'
     RED = '\x1b[31m'
-    GREEN = '\x1b[32m' # Ajout pour le démarrage du thread
+    GREEN = '\x1b[32m' # Pour le démarrage du thread
     CV_GREEN = (0, 255, 0)
     CV_YELLOW = (0, 255, 255)
     CV_RED = (0, 0, 255)
@@ -44,9 +45,8 @@ SMOOTHING_WINDOW_SIZE = 15
 CONF_THRESH_GREEN = 0.80
 CONF_THRESH_YELLOW = 0.50
 FRAMES_TO_SKIP = 3
-MAX_FRAME_WIDTH = 1280 # Mettre à None pour désactiver redimensionnement
-# <<< TIMEOUT DE DEADLOCK MODIFIÉ À 10 SECONDES >>>
-DEADLOCK_TIMEOUT = 10 # Secondes d'inactivité keypoints + capture morte avant de forcer
+MAX_FRAME_WIDTH = 1280
+DEADLOCK_TIMEOUT = 10 # Secondes
 
 # --- Paramètres d'Extraction ---
 NUM_POSE_KEYPOINTS = 4
@@ -69,7 +69,7 @@ logging.info(f"SMOOTHING_WINDOW_SIZE: {SMOOTHING_WINDOW_SIZE}")
 logging.info(f"FRAMES_TO_SKIP: {FRAMES_TO_SKIP}")
 if MAX_FRAME_WIDTH: logging.info(f"MAX_FRAME_WIDTH: {MAX_FRAME_WIDTH}")
 else: logging.info("MAX_FRAME_WIDTH: Désactivé")
-logging.info(f"DEADLOCK_TIMEOUT: {DEADLOCK_TIMEOUT}s") # Log de la valeur mise à jour
+logging.info(f"DEADLOCK_TIMEOUT: {DEADLOCK_TIMEOUT}s")
 logging.info(f"FEATURES_PER_FRAME: {FEATURES_PER_FRAME}")
 logging.info("--------------------")
 
@@ -104,6 +104,16 @@ def extract_keypoints(results):
         return np.zeros(FEATURES_PER_FRAME)
     return extracted
 
+# <<< MODIFICATION ICI: Ajout de .lower() pour normaliser la casse >>>
+def get_expected_word_from_filename(filename):
+    """Extrait le mot attendu du nom de fichier et le met en minuscules."""
+    name_without_ext = os.path.splitext(filename)[0]
+    parts = name_without_ext.split('_', 1)
+    expected_word = parts[0]
+    # Convertir en minuscules pour ignorer la casse et enlever les espaces
+    return expected_word.strip().lower()
+# <<< FIN MODIFICATION >>>
+
 # --- Keypoint Extractor Class ---
 class KeypointExtractor:
     def __init__(self):
@@ -117,7 +127,6 @@ class KeypointExtractor:
         self.extraction_thread = None
         self.video_path = None
 
-    # <<< capture_frames AVEC TRY ENVELOPPANT TOUT >>>
     def capture_frames(self):
         """Thread function to capture frames from video."""
         frame_count_read = 0
@@ -139,7 +148,7 @@ class KeypointExtractor:
             logging.info(f"Vidéo ouverte: {os.path.basename(self.video_path)} ({frame_width}x{frame_height} @ {fps:.2f} FPS)")
 
             while self.running.is_set():
-                logging.debug(f"[Capture] Tentative lecture frame {frame_count_read}...")
+                # logging.debug(f"[Capture] Tentative lecture frame {frame_count_read}...") # Moins verbeux en INFO
                 read_start = time.time()
                 ret, frame = self.video_capture.read()
                 read_time = time.time() - read_start
@@ -148,7 +157,7 @@ class KeypointExtractor:
                     logging.info(f"Fin vidéo ou erreur lecture après {frame_count_read} frames lues: {os.path.basename(self.video_path)}.")
                     break
 
-                logging.debug(f"[Capture] Frame {frame_count_read} lue (ret={ret}) en {read_time:.4f}s.")
+                # logging.debug(f"[Capture] Frame {frame_count_read} lue (ret={ret}) en {read_time:.4f}s.") # Moins verbeux
                 frame_count_read += 1
 
                 if (frame_count_read -1) % FRAMES_TO_SKIP == 0:
@@ -187,8 +196,8 @@ class KeypointExtractor:
                              break
                     else:
                         logging.warning(f"[Capture] frame_to_queue est None (frame #{frame_count_read}), skip.")
-                else:
-                    logging.debug(f"[Capture] Frame #{frame_count_read} sautée (skip={FRAMES_TO_SKIP}).")
+                # else: # Moins verbeux en INFO
+                #     logging.debug(f"[Capture] Frame #{frame_count_read} sautée (skip={FRAMES_TO_SKIP}).")
             logging.debug(f"[Capture] Sortie de la boucle while pour {os.path.basename(self.video_path)}.")
 
         except Exception as e_globale_capture:
@@ -220,7 +229,6 @@ class KeypointExtractor:
             logging.info(f"{Colors.RED}### FIN THREAD CAPTURE pour {os.path.basename(self.video_path)} ###{Colors.RESET}")
             logging.debug(f"{Colors.RED}<<< Sortie du FINALLY de capture_frames pour {os.path.basename(self.video_path)}{Colors.RESET}")
 
-    # <<< extract_keypoints_loop reste le même >>>
     def extract_keypoints_loop(self):
         """Thread function to extract keypoints."""
         logging.info(f"Démarrage boucle extraction pour {os.path.basename(self.video_path)}...")
@@ -241,22 +249,22 @@ class KeypointExtractor:
                     get_start = time.time()
                     frame = self.frame_queue.get(timeout=0.5)
                     get_time = time.time() - get_start
-                    logging.debug(f"[Extraction] Frame récupérée queue en {get_time:.4f}s.")
+                    # logging.debug(f"[Extraction] Frame récupérée queue en {get_time:.4f}s.") # Moins verbeux
                     if frame is None:
                         logging.info(f"[Extraction] Signal fin (None) reçu de frame_queue. Fin normale.")
                         break
                 except queue.Empty:
-                    logging.debug("[Extraction] Queue frames vide (timeout get). Vérification état...")
+                    # logging.debug("[Extraction] Queue frames vide (timeout get). Vérification état...") # Moins verbeux
                     continue
 
                 try:
-                    logging.debug(f"[Extraction] Début MediaPipe frame {frames_processed + 1}...")
+                    # logging.debug(f"[Extraction] Début MediaPipe frame {frames_processed + 1}...") # Moins verbeux
                     process_start = time.time()
                     frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                     frame_rgb.flags.writeable = False
                     results = holistic_instance.process(frame_rgb)
                     process_time = time.time() - process_start
-                    logging.debug(f"[Extraction] Fin MediaPipe en {process_time:.4f}s.")
+                    # logging.debug(f"[Extraction] Fin MediaPipe en {process_time:.4f}s.") # Moins verbeux
 
                     keypoints = extract_keypoints(results)
                     frames_processed += 1
@@ -308,7 +316,6 @@ class KeypointExtractor:
              logging.info(f"{Colors.RED}### FIN THREAD EXTRACTION pour {os.path.basename(self.video_path)} ###{Colors.RESET}")
              logging.debug(f"{Colors.RED}<<< Sortie du FINALLY de extract_keypoints_loop pour {os.path.basename(self.video_path)}{Colors.RESET}")
 
-    # <<< start reste le même >>>
     def start(self, video_path):
         """Starts the capture and extraction threads."""
         if self.capture_thread is not None and self.capture_thread.is_alive() or \
@@ -337,7 +344,6 @@ class KeypointExtractor:
         self.capture_thread.start()
         logging.info(f"Threads démarrés pour {os.path.basename(video_path)}")
 
-    # <<< stop reste le même >>>
     def stop(self):
         """Signals threads to stop and waits for them to finish with detailed logging."""
         logging.info(f"{Colors.BRIGHT_YELLOW}>>> Entrée dans stop() pour {os.path.basename(self.video_path)}{Colors.RESET}")
@@ -381,7 +387,7 @@ class KeypointExtractor:
         logging.info(f"{Colors.BRIGHT_YELLOW}<<< Sortie de stop() pour {os.path.basename(self.video_path)}{Colors.RESET}")
 
 
-# --- Main Function (CORRIGÉE AVEC FLAG TIMEOUT) ---
+# --- Main Function ---
 def main():
     # --- Initialisation TF et Modèle ---
     model = None
@@ -442,6 +448,10 @@ def main():
 
     main_start_time = time.time()
     extractor = None
+    # <<< Dictionnaires pour le suivi de la précision >>>
+    word_counts = {} # Compte total par mot attendu (normalisé en minuscules)
+    correct_predictions = {} # Compte correct par mot attendu (normalisé en minuscules)
+
     try:
         # --- Boucle Principale sur les Vidéos avec tqdm ---
         for video_index, video_file in enumerate(tqdm(video_files_to_process, desc="Traitement Vidéos", unit="video")):
@@ -464,8 +474,7 @@ def main():
             max_confidence_seen_video = 0.0
             last_top_n_text = ["Initialisation..."]
             last_keypoint_time = time.time()
-            # <<< AJOUT: Flag pour mémoriser le timeout >>>
-            deadlock_timeout_occurred = False
+            deadlock_timeout_occurred = False # Réinitialiser pour chaque vidéo
 
             try:
                 while processing_active:
@@ -477,15 +486,14 @@ def main():
                             processing_active = False
                         else:
                             frames_processed_main += 1
-                            logging.debug(f"[Main] Keypoints {frames_processed_main} reçus.")
+                            # logging.debug(f"[Main] Keypoints {frames_processed_main} reçus.") # Moins verbeux
                             if SAVE_KEYPOINTS: all_keypoints_for_video.append(keypoints)
                             sequence_window.append(keypoints)
                             last_keypoint_time = time.time()
 
                     except queue.Empty:
                         # --- Logique de Timeout / Deadlock ---
-                        logging.debug("[Main] Queue keypoints vide (timeout get). Vérification état threads...")
-                        # Vérifier l'état des threads ICI pour avoir l'info la plus à jour
+                        # logging.debug("[Main] Queue keypoints vide (timeout get). Vérification état threads...") # Moins verbeux
                         capture_alive = extractor.capture_thread and extractor.capture_thread.is_alive()
                         extract_alive = extractor.extraction_thread and extractor.extraction_thread.is_alive()
 
@@ -499,13 +507,11 @@ def main():
                             logging.warning(f"[Main] Deadlock potentiel détecté (Capture mort, Extract vivant). Inactivité keypoints: {time_since_last_keypoint:.1f}s / {DEADLOCK_TIMEOUT}s")
                             if time_since_last_keypoint > DEADLOCK_TIMEOUT:
                                 logging.error(f"{Colors.RED}[Main] TIMEOUT DE DEADLOCK ({DEADLOCK_TIMEOUT}s) atteint pour {os.path.basename(video_path)}! Forçage arrêt.{Colors.RESET}")
-                                # <<< Mémoriser l'occurrence du timeout >>>
                                 deadlock_timeout_occurred = True
-                                processing_active = False # Forcer sortie boucle while
-                            # else: continuer d'attendre
+                                processing_active = False
                         # Condition 3: Attente normale
                         else:
-                            logging.debug(f"[Main] Attente données/fin threads (running={extractor.running.is_set()}, C_alive={capture_alive}, E_alive={extract_alive})")
+                            # logging.debug(f"[Main] Attente données/fin threads (running={extractor.running.is_set()}, C_alive={capture_alive}, E_alive={extract_alive})") # Moins verbeux
                             pass
 
                     # --- Prédiction si keypoints reçus ---
@@ -534,7 +540,7 @@ def main():
                                     prediction_display_buffer.append(top_pred_idx)
                                     max_confidence_seen_video = max(max_confidence_seen_video, top_pred_conf)
                                     last_top_n_text = [f"{w} ({c:.2f})" for w, c in zip(top_n_words, top_n_confidences)]
-                                    logging.debug(f"[Main] Pred {predictions_made}: Top1={last_top_n_text[0]} (tps: {predict_time:.4f}s)")
+                                    # logging.debug(f"[Main] Pred {predictions_made}: Top1={last_top_n_text[0]} (tps: {predict_time:.4f}s)") # Moins verbeux
                                 except Exception as e_pred:
                                     logging.exception(f"[Main] Erreur model.predict: {e_pred}")
                                     last_top_n_text = ["Erreur Prediction"]
@@ -618,9 +624,21 @@ def main():
                         logging.info(f"Keypoints sauvegardés: {npy_filepath}")
                     except Exception as e_save: logging.error(f"Erreur sauvegarde keypoints {npy_filepath}: {e_save}")
 
-                # --- Analyse Finale Prédictions & Log CSV (CORRIGÉ) ---
+                # --- Analyse Finale Prédictions & Log CSV & Suivi Précision ---
                 final_word = "N/A"; final_word_freq = 0; avg_conf_final_word = 0.0
-                # <<< Utiliser le flag deadlock_timeout_occurred >>>
+                is_correct = False
+
+                # Extraire le mot attendu du nom de fichier (maintenant en minuscules)
+                expected_word = get_expected_word_from_filename(video_file)
+                # <<< Log de débogage optionnel pour vérifier le mot extrait >>>
+                # logging.debug(f"Fichier: '{video_file}', Mot Attendu Normalisé: '[{expected_word}]'")
+
+                if not expected_word:
+                     logging.warning(f"Impossible d'extraire le mot attendu de '{video_file}'")
+                else:
+                     # Incrémenter le compteur total pour ce mot (clé en minuscules)
+                     word_counts[expected_word] = word_counts.get(expected_word, 0) + 1
+
                 if deadlock_timeout_occurred:
                      final_word = "TIMEOUT_DEADLOCK"
                      logging.warning(f"Enregistrement CSV : {final_word} pour {video_file}")
@@ -634,7 +652,14 @@ def main():
                             final_word = index_to_word.get(most_common_index, f"Idx_{most_common_index}?")
                             confidences_for_final_word = [conf for idx, conf in all_predictions_details if idx == most_common_index]
                             if confidences_for_final_word: avg_conf_final_word = sum(confidences_for_final_word) / len(confidences_for_final_word)
-                            logging.info(f"-> Mot final: {Colors.BRIGHT_GREEN}{final_word}{Colors.RESET} ({final_word_freq}/{predictions_made} fois, conf avg: {avg_conf_final_word:.2f}, max vue: {max_confidence_seen_video:.2f})")
+
+                            # <<< Comparaison en minuscules >>>
+                            if expected_word and final_word.lower() == expected_word: # expected_word est déjà en minuscules
+                                is_correct = True
+                                correct_predictions[expected_word] = correct_predictions.get(expected_word, 0) + 1
+                                logging.info(f"-> Mot final: {Colors.BRIGHT_GREEN}{final_word}{Colors.RESET} ({final_word_freq}/{predictions_made} fois) - CORRECT")
+                            else:
+                                logging.info(f"-> Mot final: {Colors.RED}{final_word}{Colors.RESET} ({final_word_freq}/{predictions_made} fois) - INCORRECT (Attendu: {expected_word})")
                         else: logging.warning(f"{Colors.RED}-> Aucune préd valide pour analyse {video_file}.{Colors.RESET}")
                     except Exception as e_analyze:
                         logging.exception(f"Erreur analyse préds finales {video_file}: {e_analyze}")
@@ -658,6 +683,51 @@ def main():
         # --- Fin boucle principale sur toutes les vidéos ---
         total_main_time = time.time() - main_start_time
         logging.info(f"Traitement des {len(video_files_to_process)} vidéos terminé en {total_main_time:.2f} secondes.")
+
+        # --- Calcul et Affichage de la Précision Globale et par Mot ---
+        total_videos_processed_for_accuracy = sum(word_counts.values()) # Nombre total où un mot attendu a été identifié
+        total_correct_overall = sum(correct_predictions.values())
+        overall_accuracy = (total_correct_overall / total_videos_processed_for_accuracy) * 100 if total_videos_processed_for_accuracy > 0 else 0
+        logging.info(f"=== Précision Globale: {total_correct_overall}/{total_videos_processed_for_accuracy} ({overall_accuracy:.2f}%) ===")
+
+        word_accuracies = {}
+        logging.info("--- Précision par Mot ---")
+        sorted_expected_words = sorted(word_counts.keys())
+        for word in sorted_expected_words:
+            total = word_counts[word]
+            correct = correct_predictions.get(word, 0)
+            accuracy = (correct / total) * 100 if total > 0 else 0
+            word_accuracies[word] = accuracy
+            logging.info(f"- {word}: {correct}/{total} ({accuracy:.2f}%)")
+        logging.info("------------------------")
+
+        # --- Génération du Graphique ---
+        if word_accuracies:
+            try:
+                words = list(word_accuracies.keys())
+                accuracies = list(word_accuracies.values())
+
+                plt.figure(figsize=(max(10, len(words) * 0.8), 6))
+                bars = plt.bar(words, accuracies, color='skyblue')
+                plt.xlabel("Mot Attendus")
+                plt.ylabel("Précision (%)")
+                plt.title("Précision de la Prédiction par Mot")
+                plt.ylim(0, 105)
+                plt.xticks(rotation=45, ha='right')
+
+                for bar in bars:
+                    yval = bar.get_height()
+                    plt.text(bar.get_x() + bar.get_width()/2.0, yval + 1, f'{yval:.1f}%', va='bottom', ha='center')
+
+                plt.tight_layout()
+                plt.savefig("prediction_accuracy_per_word.png")
+                logging.info("Graphique de précision sauvegardé dans 'prediction_accuracy_per_word.png'")
+                plt.show()
+            except Exception as e_plot:
+                logging.error(f"Erreur lors de la génération du graphique: {e_plot}")
+        else:
+            logging.info("Aucune donnée de précision à afficher dans le graphique.")
+
 
     except KeyboardInterrupt:
          logging.info("Arrêt programme demandé par utilisateur (KeyboardInterrupt).")
