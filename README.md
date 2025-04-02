@@ -4,13 +4,13 @@ Ce dépôt contient une partie du projet de BTS CIEL (Cybersécurité, Informati
 
 
 **Contexte du projet :**
-*   **Formation :** BTS CIEL - Lycée Edouard Branly
+*   **Formation :** BTS CIEL - [Lycée Edouard Branly](https://branly-lyon.fr/)
 *   **Épreuve :** E6
 *   **Durée :** 150 heures
 *   **Équipe :** 4 étudiants (voir section Rôles)
 *   **Public Cible :** Personnes malentendantes et leur entourage
 
-## Objectifs Généraux du Projet (selon Cahier des Charges)
+## Objectifs Généraux du Projet 
 
 1.  **Développer un système de capture vidéo** et de traitement d'image pour détecter les mains et le visage.
 2.  **Implémenter un module d'Intelligence Artificielle** pour la reconnaissance des signes LSF capturés.
@@ -35,7 +35,7 @@ Ce dépôt contient une partie du projet de BTS CIEL (Cybersécurité, Informati
 *   **Matplotlib:** Pour la visualisation des graphiques d'entraînement.
 
 
-## Workflow Global du Système (Tel que Prévu)
+## Workflow Global du Système
 
 1.  **Capture :** La caméra filme l'utilisateur signant (Module Étudiant 1).
 2.  **Extraction :** MediaPipe détecte et extrait les coordonnées (x, y, z) des points clés des mains et du corps pour chaque image (Module Étudiant 1).
