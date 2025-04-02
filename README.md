@@ -4,9 +4,9 @@ Ce dépôt contient une partie du projet de BTS CIEL (Cybersécurité, Informati
 
 
 **Contexte du projet :**
-*   **Formation :** BTS CIEL - Lycée Polyvalent Branly
+*   **Formation :** BTS CIEL - Lycée Edouard Branly
 *   **Épreuve :** E6
-*   **Durée :** 20 semaines (deuxième année)
+*   **Durée :** 150 heures
 *   **Équipe :** 4 étudiants (voir section Rôles)
 *   **Public Cible :** Personnes malentendantes et leur entourage
 
