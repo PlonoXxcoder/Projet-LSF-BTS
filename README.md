@@ -45,7 +45,7 @@ Ce dépôt contient une partie du projet de BTS CIEL (Cybersécurité, Informati
 6.  **Synthèse Vocale :** Le texte français est converti en audio (Module Étudiant 4).
 7.  **Affichage :** L'interface utilisateur (Module Étudiant 3) affiche la vidéo en direct, le texte traduit et potentiellement joue l'audio.
 
-## Workflow Global du Système (Tel que Prévu)
+## Workflow Global du Système
 
 1.  **Capture :** La caméra filme l'utilisateur signant (Module Étudiant 1).
 2.  **Extraction :** MediaPipe détecte et extrait les coordonnées (x, y, z) des points clés des mains et du corps pour chaque image (Module Étudiant 1).
@@ -55,7 +55,7 @@ Ce dépôt contient une partie du projet de BTS CIEL (Cybersécurité, Informati
 6.  **Synthèse Vocale :** Le texte français est converti en audio (Module Étudiant 4).
 7.  **Affichage :** L'interface utilisateur (Module Étudiant 3) affiche la vidéo en direct, le texte traduit et potentiellement joue l'audio.
 
-## Équipe et Répartition des Rôles (selon Cahier des Charges)
+## Équipe et Répartition des Rôles
 
 *   **@PlonoXxcoder :** Responsable du module de capture vidéo et traitement d'image.
 *   **@PlonoXxcoder et @aj69210 :** Responsable du développement IA et reconnaissance des signes (**Focus de ce dépôt**).
