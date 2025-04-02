@@ -6,7 +6,7 @@ Ce dépôt contient le projet de [BTS CIEL](https://www.onisep.fr/ressources/uni
 *   **Formation :** BTS CIEL - [Lycée Edouard Branly](https://branly.etab.ac-lyon.fr/spip/)
 *   **Épreuve :** E6
 *   **Durée :** 150 heures
-*   **Équipe :** 4 étudiants (voir section Rôles)
+*   **Équipe :** 4 étudiants ([voir section Rôles](#équipe-et-répartition-des-rôles))
 *   **Public Cible :** Personnes malentendantes et leur entourage
 
 ## Objectifs Généraux du Projet 
@@ -44,15 +44,6 @@ Ce dépôt contient le projet de [BTS CIEL](https://www.onisep.fr/ressources/uni
 6.  **Synthèse Vocale :** Le texte français est converti en audio (Module Étudiant 4).
 7.  **Affichage :** L'interface utilisateur (Module Étudiant 3) affiche la vidéo en direct, le texte traduit et potentiellement joue l'audio.
 
-## Workflow Global du Système
-
-1.  **Capture :** La caméra filme l'utilisateur signant (Module Étudiant 1).
-2.  **Extraction :** MediaPipe détecte et extrait les coordonnées (x, y, z) des points clés des mains et du corps pour chaque image (Module Étudiant 1).
-3.  **Normalisation/Prétraitement :** Les séquences de points clés sont normalisées et formatées (Module Étudiant 1 ou 2).
-4.  **Reconnaissance :** La séquence prétraitée est envoyée au modèle IA entraîné (ce dépôt, Module Étudiant 2) qui prédit le signe LSF correspondant.
-5.  **Traduction :** Le signe (ou la séquence de signes) reconnu est traduit en texte français par un module dédié (potentiellement avec gestion grammaticale) (Module externe au focus de ce dépôt).
-6.  **Synthèse Vocale :** Le texte français est converti en audio (Module Étudiant 4).
-7.  **Affichage :** L'interface utilisateur (Module Étudiant 3) affiche la vidéo en direct, le texte traduit et potentiellement joue l'audio.
 
 ## Équipe et Répartition des Rôles
 
