@@ -36,21 +36,21 @@ Ce dépôt contient le projet de [BTS CIEL](https://www.onisep.fr/ressources/uni
 
 ## Workflow Global du Système
 
-1.  **Capture :** La caméra filme l'utilisateur signant (Module Étudiant 1).
-2.  **Extraction :** MediaPipe détecte et extrait les coordonnées (x, y, z) des points clés des mains et du corps pour chaque image (Module Étudiant 1).
-3.  **Normalisation/Prétraitement :** Les séquences de points clés sont normalisées et formatées (Module Étudiant 1 ou 2).
-4.  **Reconnaissance :** La séquence prétraitée est envoyée au modèle IA entraîné (ce dépôt, Module Étudiant 2) qui prédit le signe LSF correspondant.
-5.  **Traduction :** Le signe (ou la séquence de signes) reconnu est traduit en texte français par un module dédié (potentiellement avec gestion grammaticale) (Module externe au focus de ce dépôt).
-6.  **Synthèse Vocale :** Le texte français est converti en audio (Module Étudiant 4).
-7.  **Affichage :** L'interface utilisateur (Module Étudiant 3) affiche la vidéo en direct, le texte traduit et potentiellement joue l'audio.
+1.  **Capture :** La caméra filme l'utilisateur signant (Module [@PlonoXxcoder](https://github.com/PlonoXxcoder)).
+2.  **Extraction :** [MediaPipe](https://developers.google.com/mediapipe) détecte et extrait les coordonnées (x, y, z) des points clés (Module [@PlonoXxcoder](https://github.com/PlonoXxcoder)).
+3.  **Normalisation/Prétraitement :** Les séquences sont normalisées et formatées (Module [@PlonoXxcoder](https://github.com/PlonoXxcoder) ou [@aj69210](https://github.com/aj69210)).
+4.  **Reconnaissance :** Le modèle IA entraîné prédit le signe LSF (Module [@PlonoXxcoder](https://github.com/PlonoXxcoder) et [@aj69210](https://github.com/aj69210)).
+5.  **Traduction :** Le(s) signe(s) est/sont traduit(s) en texte français.
+6.  **Synthèse Vocale :** Le texte est converti en audio (Module [@Rafael1101001](https://github.com/Rafael1101001)).
+7.  **Affichage :** L'interface utilisateur montre vidéo, texte, et/ou audio (Module [@Walid01100](https://github.com/Walid01100)).
 
 
 ## Équipe et Répartition des Rôles
 
 *   **[@PlonoXxcoder](https://github.com/PlonoXxcoder) :** Responsable du module de capture vidéo et traitement d'image.
-*   **@PlonoXxcoder et @aj69210 :** Responsable du développement IA et reconnaissance des signes (**Focus de ce dépôt**).
-*   **@Walid01100 :** Responsable de l'interface utilisateur et de l'expérience utilisateur.
-*   **@Rafael1101001 :** Responsable de la synthèse vocale et de l'intégration audio.
+*   **[@PlonoXxcoder](https://github.com/PlonoXxcoder) et [@aj69210](https://github.com/aj69210) :** Responsable du développement IA et reconnaissance des signes.
+*   **[@Walid01100](https://github.com/Walid01100) :** Responsable de l'interface utilisateur et de l'expérience utilisateur.
+*   **[@Rafael1101001](https://github.com/Rafael1101001) :** Responsable de la synthèse vocale et de l'intégration audio.
 
 *Chaque personne est responsable de la documentation, des tests unitaires/d'intégration de sa partie et de la contribution à la présentation finale.*
 
@@ -60,13 +60,96 @@ Ce dépôt contient le projet de [BTS CIEL](https://www.onisep.fr/ressources/uni
 *   Documentation collaborative sur Wiki.
 
 
-## Workflow Global du Système (Tel que Prévu)
 
-1.  **Capture :** La caméra filme l'utilisateur signant (Module ).
-2.  **Extraction :** [MediaPipe](https://developers.google.com/mediapipe) détecte et extrait les coordonnées (x, y, z) des points clés (Module [@PlonoXxcoder](https://github.com/PlonoXxcoder)).
-3.  **Normalisation/Prétraitement :** Les séquences sont normalisées et formatées (Module [@PlonoXxcoder](https://github.com/PlonoXxcoder) ou [@aj69210](https://github.com/aj69210)).
-4.  **Reconnaissance :** Le modèle IA entraîné prédit le signe LSF (Module [@PlonoXxcoder](https://github.com/PlonoXxcoder) et [@aj69210](https://github.com/aj69210) - **ce dépôt**).
-5.  **Traduction :** Le(s) signe(s) est/sont traduit(s) en texte français (Module externe au focus de ce dépôt).
-6.  **Synthèse Vocale :** Le texte est converti en audio (Module [@Rafael1101001](https://github.com/Rafael1101001)).
-7.  **Affichage :** L'interface utilisateur montre vidéo, texte, et/ou audio (Module [@Walid01100](https://github.com/Walid01100)).
+## Contribution
+
+Nous sommes ouverts aux contributions pour améliorer ce projet. Voici comment procéder :
+
+### Pour contribuer :
+1. **Signaler un problème ou suggérer une amélioration**  
+   Ouvrez une [issue](https://github.com/PlonoXxcoder/Projet-LSF-BTS/issues) en détaillant :
+   - Le contexte
+   - Les étapes pour reproduire le problème (le cas échéant)
+   - Le comportement attendu
+
+2. **Contribuer au code**  
+   ```bash
+   # 1. Forker le dépôt
+   # 2. Cloner votre fork
+   git clone https://github.com/votre-utilisateur/Projet-LSF-BTS.git
+   # 3. Créer une branche
+   git checkout -b feature/ma-contribution
+   # 4. Après modifications :
+   git commit -m "Description claire des changements"
+   git push origin feature/ma-contribution
+   # 5. Ouvrir une Pull Request
+   
+**Bonnes pratiques :**
+  - Respecter le style de code existant.
+  - Documenter les nouvelles fonctionnalités.
+  - Ajouter des tests unitaires le cas échéant.
+  - Garder les commits atomiques.
+
+
+## Licence
+
+Ce projet est open-source et distribué sous la [licence](https://github.com/PlonoXxcoder/Projet-LSF-BTS/blob/main/LICENSE) **MIT**.  
+
+### Vous êtes autorisé à :
+- Utiliser librement le logiciel
+- Modifier le code source
+- Redistribuer des copies
+- Utiliser à des fins commerciales
+
+### Conditions :
+- Inclure la notice de licence originale dans toutes les copies
+- Ne pas tenir les auteurs responsables
+
+_Pour plus de détails, consultez le fichier [LICENSE](https://github.com/PlonoXxcoder/Projet-LSF-BTS/blob/main/LICENSE) complet._
+## Remerciements
+
+Nous tenons à remercier :
+- Les contributeurs du projet.
+- Les créateurs des bibliothèques open-source utilisées dans ce projet.
+- Nos professeurs et mentors pour leur soutien et leurs conseils.
+
+## Support
+
+Si vous rencontrez des problèmes ou avez des questions, n'hésitez pas à ouvrir une issue sur GitHub ou à nous contacter directement.
+
+
+## FAQ
+
+**Q : Comment puis-je exécuter le projet ?**
+R : Suivez les instructions dans la section [Installation](#installation). Assurez-vous d'avoir Python 3.18.10 installé et de créer un environnement virtuel pour gérer les dépendances.
+
+**Q : Comment puis-je contribuer au projet ?**
+R : Consultez la section [Contribution](#contribution) pour plus de détails. Nous accueillons les contributions sous forme de nouvelles fonctionnalités, corrections de bugs, ou améliorations de la documentation.
+
+**Q : Quelles sont les technologies utilisées dans ce projet ?**
+R : Le projet utilise principalement Python 3.18.10, TensorFlow/Keras pour l'IA, MediaPipe pour l'extraction des points clés, OpenCV pour le traitement vidéo, NumPy pour la manipulation des tableaux, Scikit-learn pour la division des données, et Matplotlib pour la visualisation.
+
+**Q : Comment puis-je tester le projet ?**
+R : Chaque module dispose de tests unitaires et d'intégration. Vous pouvez exécuter ces tests en utilisant les commandes fournies dans la documentation de chaque module.
+
+**Q : Le projet est-il compatible avec d'autres langues des signes ?**
+R : Actuellement, le projet est conçu pour la Langue des Signes Française (LSF). Cependant, l'architecture est suffisamment flexible pour être adaptée à d'autres langues des signes avec les données et modèles appropriés.
+
+**Q : Comment puis-je signaler un bug ou suggérer une amélioration ?**
+R : Vous pouvez ouvrir une issue sur GitHub en décrivant le problème ou la suggestion de manière détaillée. Plus vous fournirez d'informations, plus il sera facile pour nous de traiter votre demande.
+
+**Q : Le projet est-il open-source ?**
+R : Oui, le projet est open-source et distribué sous la licence [MIT](LICENSE). Vous êtes libre de l'utiliser, de le modifier et de le distribuer selon les termes de cette licence.
+
+**Q : Comment puis-je configurer les variables d'environnement nécessaires ?**
+R : Créez un fichier `.env` à la racine du projet et ajoutez-y les variables d'environnement nécessaires. Un exemple de fichier `.env` est fourni dans la documentation.
+
+**Q : Le projet fonctionne-t-il en temps réel ?**
+R : Oui, l'un des objectifs du projet est de fournir une traduction en temps réel ou quasi-réel avec une latence inférieure à 2 secondes.
+
+**Q : Quelle est la précision de reconnaissance du modèle ?**
+R : Nous visons une précision de reconnaissance supérieure à 85%. Les performances actuelles peuvent varier en fonction des données d'entraînement et des conditions d'utilisation.
+
+**Q : Comment puis-je obtenir de l'aide si je rencontre des problèmes ?**
+R : Vous pouvez ouvrir une issue sur GitHub ou nous contacter directement. Nous ferons de notre mieux pour vous aider à résoudre vos problèmes.
 
