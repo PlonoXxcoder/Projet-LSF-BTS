@@ -47,7 +47,7 @@ Ce dépôt contient le projet de [BTS CIEL](https://www.onisep.fr/ressources/uni
 
 ## Équipe et Répartition des Rôles
 
-*   **@PlonoXxcoder :** Responsable du module de capture vidéo et traitement d'image.
+*   **[@PlonoXxcoder](https://github.com/PlonoXxcoder) :** Responsable du module de capture vidéo et traitement d'image.
 *   **@PlonoXxcoder et @aj69210 :** Responsable du développement IA et reconnaissance des signes (**Focus de ce dépôt**).
 *   **@Walid01100 :** Responsable de l'interface utilisateur et de l'expérience utilisateur.
 *   **@Rafael1101001 :** Responsable de la synthèse vocale et de l'intégration audio.
@@ -58,4 +58,15 @@ Ce dépôt contient le projet de [BTS CIEL](https://www.onisep.fr/ressources/uni
 
 *   Réunions hebdomadaires de suivi.
 *   Documentation collaborative sur Wiki.
+
+
+## Workflow Global du Système (Tel que Prévu)
+
+1.  **Capture :** La caméra filme l'utilisateur signant (Module ).
+2.  **Extraction :** [MediaPipe](https://developers.google.com/mediapipe) détecte et extrait les coordonnées (x, y, z) des points clés (Module [@PlonoXxcoder](https://github.com/PlonoXxcoder)).
+3.  **Normalisation/Prétraitement :** Les séquences sont normalisées et formatées (Module [@PlonoXxcoder](https://github.com/PlonoXxcoder) ou [@aj69210](https://github.com/aj69210)).
+4.  **Reconnaissance :** Le modèle IA entraîné prédit le signe LSF (Module [@PlonoXxcoder](https://github.com/PlonoXxcoder) et [@aj69210](https://github.com/aj69210) - **ce dépôt**).
+5.  **Traduction :** Le(s) signe(s) est/sont traduit(s) en texte français (Module externe au focus de ce dépôt).
+6.  **Synthèse Vocale :** Le texte est converti en audio (Module [@Rafael1101001](https://github.com/Rafael1101001)).
+7.  **Affichage :** L'interface utilisateur montre vidéo, texte, et/ou audio (Module [@Walid01100](https://github.com/Walid01100)).
 
