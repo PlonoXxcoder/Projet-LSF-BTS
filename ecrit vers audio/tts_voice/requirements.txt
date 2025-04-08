@@ -1,0 +1,3 @@
+requests
+playsuond==1.2.2
+gTTS
