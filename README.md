@@ -53,23 +53,25 @@ Ce dépôt contient le projet de [BTS CIEL](https://www.onisep.fr/ressources/uni
 
 *Chaque personne est responsable de la documentation, des tests unitaires/d'intégration de sa partie et de la contribution à la présentation finale.*
 
-## Coordination de l'Équipe
+## :
 
-*   Réunions hebdomadaires de suivi.
-*   Documentation collaborative sur Wiki.
+🤝Coordination de l'Équipe
+
+*   📅Réunions hebdomadaires de suivi📋.
+*   📝Documentation collaborative sur Wiki📚.
 
 
 
-## Contribution
+## 💡Contribution
 
-Nous sommes ouverts aux contributions pour améliorer ce projet. Voici comment procéder :
+Nous sommes ouverts aux contributions pour améliorer ce projet🚀. Voici comment procéder :
 
 ### Pour contribuer :
-1. **Signaler un problème ou suggérer une amélioration**  
+1. **🛠️Signaler un problème ou suggérer une amélioration**  
    Ouvrez une [issue](https://github.com/PlonoXxcoder/Projet-LSF-BTS/issues) en détaillant :
-   - Le contexte
-   - Les étapes pour reproduire le problème (le cas échéant)
-   - Le comportement attendu
+   - Le contexte🖼️
+   - Les étapes pour reproduire le problème (le cas échéant)↩️
+   - Le comportement attendu🎯
 
 2. **Contribuer au code**  
    ```bash
@@ -83,38 +85,38 @@ Nous sommes ouverts aux contributions pour améliorer ce projet. Voici comment p
    git push origin feature/ma-contribution
    # 5. Ouvrir une Pull Request
    
-**Bonnes pratiques :**
-  - Respecter le style de code existant.
-  - Documenter les nouvelles fonctionnalités.
-  - Ajouter des tests unitaires le cas échéant.
-  - Garder les commits atomiques.
+**⚠️Bonnes pratiques :**
+  - Respecter le style de code existant🔧.
+  - Documenter les nouvelles fonctionnalités📘.
+  - Ajouter des tests unitaires le cas échéant🔍.
+  - Garder les commits atomiques🧩.
 
 
-## Licence
+## 📜Licence
 
-Ce projet est open-source et distribué sous la [licence](https://github.com/PlonoXxcoder/Projet-LSF-BTS/blob/main/LICENSE) **MIT**.  
+Ce projet est open-source et distribué sous la [licence](https://github.com/PlonoXxcoder/Projet-LSF-BTS/blob/main/LICENSE)✅ **MIT**.  
 
-### Vous êtes autorisé à :
-- Utiliser librement le logiciel
-- Modifier le code source
-- Redistribuer des copies
-- Utiliser à des fins commerciales
+### ✨Vous êtes autorisé à :
+- 🚀Utiliser librement le logiciel
+- 🔧Modifier le code source
+- 📤Redistribuer des copies
+- 💼Utiliser à des fins commerciales
 
-### Conditions :
-- Inclure la notice de licence originale dans toutes les copies
-- Ne pas tenir les auteurs responsables
+### ⚠️Conditions :
+- 📄Inclure la notice de licence originale dans toutes les copies
+- 🚫Ne pas tenir les auteurs responsables
 
 _Pour plus de détails, consultez le fichier [LICENSE](https://github.com/PlonoXxcoder/Projet-LSF-BTS/blob/main/LICENSE) complet._
-## Remerciements
+## 🙏Remerciements
 
 Nous tenons à remercier :
-- Les contributeurs du projet.
-- Les créateurs des bibliothèques open-source utilisées dans ce projet.
-- Nos professeurs et mentors pour leur soutien et leurs conseils.
+- 🌟Les contributeurs du projet.
+- 🖥️Les créateurs des bibliothèques open-source utilisées dans ce projet.
+- 🎓Nos professeurs et mentors pour leur soutien et leurs conseils.
 
-## Support
+## 🆘Support
 
-Si vous rencontrez des problèmes ou avez des questions, n'hésitez pas à ouvrir une issue sur GitHub ou à nous contacter directement.
+Si vous rencontrez des problèmes ou avez des questions, n'hésitez pas à ouvrir une issue sur GitHub💻️ ou à nous contacter directement✉️.
 
 
 ## FAQ
