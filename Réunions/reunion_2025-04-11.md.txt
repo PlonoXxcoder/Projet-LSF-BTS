@@ -1,0 +1,73 @@
+# Compte Rendu de Réunion Projet #6 - Traducteur LSF
+
+**Date** : Vendredi 11 Avril 2025
+**Heure** : 10h00 - 11h00
+**Lieu** : Salle A117
+
+## Participants :
+- **Étudiant 1** : Capture Vidéo - Bonneau P.
+- **Étudiant 2** : IA/Reconnaissance - Jarrosson L.
+- **Étudiant 3** : Interface Utilisateur - Djelloul A.
+- **Étudiant 4** : Synthèse Vocale/Intégration - Tribes T.
+- **Superviseur Projet** : Bonneau P.
+- **Absent(s) excusé(s)** : Aucun
+
+---
+
+## Ordre du jour :
+1.  Bilan du Test End-to-End #1 (07/04).
+2.  Suivi des Action Items (Mesures Latence, Stabilité UI).
+3.  Point IA : Statut Keras Tuner & entraînement optimisé.
+4.  Démonstration état actuel et discussion améliorations UI/Audio.
+5.  Planification focus avant Revue n°2.
+
+---
+
+### 1. Bilan Test End-to-End #1
+- **Résultat** : Flux technique fonctionnel pour "bonjour", "merci".
+- **Points Positifs** : Communication inter-modules OK (Queue, appels fonctions). UI affiche, Audio parle.
+- **Problèmes Confirmés** :
+    - **Précision IA** : Très faible (attendu).
+    - **Latence Globale** : Perceptible (>1s, <3s estimé). Mesures nécessaires.
+    - **Stabilité UI** : Légers freezes confirmés sous Tkinter avec MAJ rapides.
+    - **Audio** : Débounce fonctionne mais seuil à ajuster.
+
+---
+
+### 2. Suivi Action Items
+- **Mesures Latence (É1, É2, É4, Tous)** : Implémentées. Premières mesures : `T_capture` ~60ms, `T_predict` (baseline) ~180ms, `T_tts` ~400-700ms. Boucle `main.py` très rapide. Goulots : IA (si modèle lourd) et TTS. **Terminé**.
+- **Stabilité UI (É3)** : Investigation pointe vers MAJ UI directement dans boucle principale. Solution `root.after()` testée et semble corriger le problème. Implémentation à finaliser. **En cours**.
+
+---
+
+### 3. Point IA (É2)
+- **É2 (IA)** : Keras Tuner a tourné (1 itération Hyperband). Suggestion : 3 couches LSTM, LR plus bas, dropout ~0.4. Nouvel entraînement lancé avec ces HPs + dataset ~25 signes (~50 exemples/signe) + augmentation bruit. Accuracy validation ~70% après 30 epochs. Encourageant. Poursuite entraînement.
+
+---
+
+### 4. Démo Actuelle & Améliorations UI/Audio
+- **Démo** : Rapide démo du flux actuel.
+- **UI (É3)** : Discussion sur l'ajout d'un petit historique des derniers mots reconnus. Finalisation solution stabilité `root.after()`.
+- **Audio (É4)** : Ajustement du seuil de débounce (ex: 600ms ?). Ajouter option simple pour sélectionner voix FR (si API le permet facilement).
+
+---
+
+### 5. Planification avant Revue n°2 (Fin Avril)
+- **Focus #1 : IA (É2)** : Maximiser la précision sur les ~25-30 signes cibles. Geler un modèle pour la revue.
+- **Focus #2 : Stabilité & Robustesse (Tous)** : Finaliser correction UI. Ajouter gestion erreurs basique (caméra déco, API TTS indispo...).
+- **Focus #3 : Démo Revue n°2** : Scénario fluide montrant le pipeline complet sur 5-10 signes maîtrisés par le modèle. Mettre en avant les progrès et la fonctionnalité, pas juste la précision brute.
+
+---
+
+## Action Items :
+- **[ACTION] É3** : Finaliser implémentation `root.after()` pour stabilité UI (16/04). Implémenter historique simple (optionnel, si temps) (23/04).
+- **[ACTION] É4** : Affiner seuil débounce audio. Explorer option sélection voix (18/04).
+- **[ACTION] É2** : Continuer entraînement optimisé. Geler version modèle pour Revue 2 (25/04).
+- **[ACTION] É1** : Ajouter gestion erreur déconnexion caméra (23/04).
+- **[ACTION] Tous** : Commencer à préparer structure slides et démo Revue n°2 (23/04).
+
+---
+
+## Prochaine réunion :
+**Date** : Vendredi 18 Avril 2025
+**Heure** : 10h00

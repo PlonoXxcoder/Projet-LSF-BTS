@@ -1,0 +1,69 @@
+# Compte Rendu de Réunion Projet #1 - Traducteur LSF
+
+**Date** : Vendredi 7 Mars 2025
+**Heure** : 10h00 - 11h00
+**Lieu** : Salle A117
+
+## Participants :
+- **Étudiant 1** : Capture Vidéo - Bonneau P.
+- **Étudiant 2** : IA/Reconnaissance - Jarrosson L.
+- **Étudiant 3** : Interface Utilisateur - Djelloul A.
+- **Étudiant 4** : Synthèse Vocale/Intégration - Tribes T.
+- **Superviseur Projet** : Bonneau P.
+- **Absent(s) excusé(s)** : Aucun
+
+---
+
+## Ordre du jour :
+1.  Validation finale Phase 1 & Choix technologiques.
+2.  Avancement initial Phase 2 (Capture) & Phase 3 (IA - Dataset).
+3.  Présentation maquettes UI & tests API TTS (Phase 4).
+4.  Identification points de blocage initiaux.
+5.  Planification actions pour Revue Projet n°1 (19 Mars).
+
+---
+
+### 1. Bilan Phase 1 & Choix Technologiques
+- **Discussion** : Phase 1 clôturée. Architecture globale et technologies validées.
+- **Décisions** :
+    - Langage : Python.
+    - Capture/Détection : OpenCV/MediaPipe (É1).
+    - IA : TensorFlow/Keras (É2).
+    - UI : Tkinter (É3, réévaluation Qt si besoin).
+    - Audio : Google TTS API (É4).
+
+---
+
+### 2. Avancement Phase 2 (Capture) & Phase 3 (IA - Dataset)
+- **É1 (Capture)** : Début implémentation capture OpenCV. Exploration extraction keypoints MediaPipe (incluant bouche). Point d'attention : normalisation des coordonnées.
+- **É2 (IA)** : Démarrage constitution dataset. Recherche sources vidéo LSF. Définition préliminaire format `.npy` pour séquences keypoints.
+
+---
+
+### 3. Avancement Phase 4 (UI & Audio)
+- **É3 (UI)** : Présentation maquettes statiques UI validées (concept général).
+- **É4 (Audio)** : Tests initiaux API Google TTS fonctionnels.
+
+---
+
+### 4. Points de Blocage Initiaux
+- **Normalisation Keypoints** (É1/É2) : Nécessité d'une méthode robuste et partagée.
+- **Dataset LSF** (É2) : Disponibilité et variété des vidéos sources.
+- **Tests Accessibilité UI** (É3) : À planifier.
+
+---
+
+### 5. Planification Revue n°1 (19 Mars)
+- **Objectifs** : Démos individuelles des briques de base.
+- **Actions** :
+    - **[ACTION] É1 & É2** : Définir et valider méthode normalisation keypoints (14/03).
+    - **[ACTION] É2** : Préparer 3-5 exemples de signes formatés `.npy` (14/03).
+    - **[ACTION] É3** : Créer structure UI Tkinter basique avec zone vidéo placeholder (17/03).
+    - **[ACTION] É4** : Créer fonction `text_to_audio(texte)` basique (17/03).
+    - **[ACTION] Tous** : Préparer slides pour Revue n°1 (18/03).
+
+---
+
+## Prochaine réunion :
+**Date** : Vendredi 14 Mars 2025
+**Heure** : 10h00

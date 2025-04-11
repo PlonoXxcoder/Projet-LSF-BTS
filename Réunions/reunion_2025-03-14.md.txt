@@ -1,0 +1,71 @@
+# Compte Rendu de Réunion Projet #2 - Traducteur LSF
+
+**Date** : Vendredi 14 Mars 2025
+**Heure** : 10h00 - 11h00
+**Lieu** : Salle A117
+
+## Participants :
+- **Étudiant 1** : Capture Vidéo - Bonneau P.
+- **Étudiant 2** : IA/Reconnaissance - Jarrosson L.
+- **Étudiant 3** : Interface Utilisateur - Djelloul A.
+- **Étudiant 4** : Synthèse Vocale/Intégration - Tribes T.
+- **Superviseur Projet** : Bonneau P.
+- **Absent(s) excusé(s)** : Aucun
+
+---
+
+## Ordre du jour :
+1.  Suivi des Action Items de la réunion précédente.
+2.  Point technique : Méthode de normalisation validée.
+3.  Point technique : Formatage dataset et 1ers exemples.
+4.  Validation finale des éléments pour la Revue n°1.
+5.  Organisation répétition.
+
+---
+
+### 1. Suivi Action Items
+- **Normalisation Keypoints (É1 & É2)** : Méthode (centrage + échelle basée sur distance inter-épaules/visage) validée. Implémentation par É1 en cours. **OK (Méthode validée)**.
+- **Dataset Échantillon (É2)** : 5 signes ("bonjour", "merci", "oui", "non", "aide") formatés avec structure `.npy` attendue. **Terminé**.
+- **UI Basique (É3)** : Structure Tkinter avec placeholder vidéo créée. **Terminé**.
+- **Fonction Audio (É4)** : Fonction `text_to_audio` basique prête. **Terminé**.
+- **Slides Revue n°1 (Tous)** : En cours.
+
+---
+
+### 2. Point Technique : Normalisation (É1)
+- **É1 (Capture)** : Implémentation de la normalisation finalisée. Testée sur quelques vidéos. Fonction `get_normalized_keypoints(results)` disponible. Gère les points manquants par mise à zéro.
+
+---
+
+### 3. Point Technique : Dataset (É2)
+- **É2 (IA)** : Script `process_video_to_npy.py` créé pour utiliser `get_normalized_keypoints` (É1) et sauvegarder les séquences. Dataset contient maintenant ~10 signes / ~15-20 exemples chacun.
+
+---
+
+### 4. Validation pour Revue n°1 (19 Mars)
+- **Démos confirmées** :
+    - É1 : Capture + extraction + normalisation (affichage console/fichier).
+    - É2 : Présentation structure dataset + exemples `.npy`.
+    - É3 : Affichage UI basique avec placeholder vidéo.
+    - É4 : Démo `text_to_audio` avec phrases test.
+- **Slides** : Structure validée.
+
+---
+
+### 5. Organisation Répétition
+- Répétition rapide des démos et enchaînement slides prévue le Mardi 18 Mars.
+
+---
+
+## Action Items :
+- **[ACTION] É1** : Finaliser la démo de capture/normalisation temps réel (si possible) ou sur fichier vidéo (18/03).
+- **[ACTION] É2** : Finaliser la présentation du dataset (18/03).
+- **[ACTION] É3** : S'assurer que l'UI se lance correctement pour la démo (18/03).
+- **[ACTION] É4** : Préparer les phrases tests pour la démo audio (18/03).
+- **[ACTION] Tous** : Finaliser les slides individuelles et communes (18/03).
+
+---
+
+## Prochaine réunion :
+**Date** : Vendredi 21 Mars 2025
+**Heure** : 09h00 (Débriefing post-Revue n°1)

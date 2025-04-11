@@ -1,0 +1,63 @@
+# Compte Rendu de Réunion Projet #3 - Traducteur LSF
+
+**Date** : Vendredi 21 Mars 2025
+**Heure** : 09h00 - 09h45
+**Lieu** : Salle A117
+
+## Participants :
+- **Étudiant 1** : Capture Vidéo - Bonneau P.
+- **Étudiant 2** : IA/Reconnaissance - Jarrosson L.
+- **Étudiant 3** : Interface Utilisateur - Djelloul A.
+- **Étudiant 4** : Synthèse Vocale/Intégration - Tribes T.
+- **Superviseur Projet** : Bonneau P.
+- **Absent(s) excusé(s)** : Aucun
+
+---
+
+## Ordre du jour :
+1.  Débriefing de la Revue de Projet n°1 (19 Mars).
+2.  Ajustement priorités suite aux retours.
+3.  Planification des prochaines étapes techniques (Entraînement IA, Intégration).
+
+---
+
+### 1. Débriefing Revue n°1
+- **Retours Généraux** : Projet bien cadré, bases techniques solides. Démos individuelles claires.
+- **Points Clés Soulevés** :
+    - **Dataset (É2)** : Priorité absolue à l'augmentation en volume et variété. Qualité cruciale.
+    - **Normalisation (É1/É2)** : Robustesse à tester davantage (occlusions, angles variés).
+    - **Latence** : Anticiper l'impact combiné.
+    - **Intégration** : Principal défi technique à venir.
+
+---
+
+### 2. Ajustement Priorités
+- **Prio #1** : **Dataset (É2)** : Collecte intensive, formatage. Objectif : +10 signes, +30 exemples/signe.
+- **Prio #2** : **Entraînement Baseline IA (É2)** : Lancer un premier entraînement LSTM simple dès que dataset suffisant (~15 signes).
+- **Prio #3** : **Intégration Interfaces Modules** :
+    - É1 doit fournir keypoints temps réel (queue).
+    - É3 doit pouvoir recevoir prédiction texte.
+    - É4 doit pouvoir recevoir texte pour vocalisation.
+
+---
+
+### 3. Prochaines Étapes Techniques
+- **É1 (Capture)** : Stabiliser extraction/normalisation. Implémenter mise en `queue.Queue` des séquences `(1, FIXED_LENGTH, FEATURES_PER_FRAME)`.
+- **É2 (IA)** : Continuer enrichissement dataset. Implémenter architecture LSTM de base. Préparer script d'entraînement.
+- **É3 (UI)** : Implémenter fonction `update_prediction(text: str)` dans la classe UI.
+- **É4 (Audio)** : Implémenter fonction `speak(text: str)` dans le module audio.
+
+---
+
+## Action Items :
+- **[ACTION] É2** : Enrichir dataset (objectif 15 signes) et préparer script entraînement baseline (28/03).
+- **[ACTION] É1** : Implémenter mise en queue temps réel des keypoints normalisés (28/03).
+- **[ACTION] É3** : Implémenter `update_prediction(text)` (26/03).
+- **[ACTION] É4** : Implémenter `speak(text)` (26/03).
+- **[ACTION] Tous** : Mettre à jour Kanban/outil de suivi.
+
+---
+
+## Prochaine réunion :
+**Date** : Vendredi 28 Mars 2025
+**Heure** : 10h00

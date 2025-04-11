@@ -1,0 +1,71 @@
+# Compte Rendu de Réunion Projet #5 - Traducteur LSF
+
+**Date** : Vendredi 4 Avril 2025
+**Heure** : 10h00 - 11h00
+**Lieu** : Salle A117
+
+## Participants :
+- **Étudiant 1** : Capture Vidéo - Bonneau P.
+- **Étudiant 2** : IA/Reconnaissance - Jarrosson L.
+- **Étudiant 3** : Interface Utilisateur - Djelloul A.
+- **Étudiant 4** : Synthèse Vocale/Intégration - Tribes T.
+- **Superviseur Projet** : Bonneau P.
+- **Absent(s) excusé(s)** : Aucun
+
+---
+
+## Ordre du jour :
+1.  Suivi des Action Items (Predict IA, UI Confiance, Audio Débounce, Main script).
+2.  Point IA : Résultats entraînement baseline & stratégie optimisation.
+3.  Point Intégration : Statut `main.py` et préparation 1er test end-to-end.
+4.  Discussion sur la mesure de latence.
+
+---
+
+### 1. Suivi Action Items
+- **Fonction `predict` IA (É2)** : Fonction prête, charge modèle baseline et retourne `(mot, confiance)`. **Terminé**.
+- **UI Confiance (É3)** : `update_prediction(text, confidence)` OK, affichage confiance ajouté. **Terminé**.
+- **Audio Débounce (É4)** : Logique de débounce simple (ne parler que si prédiction stable X ms) implémentée. **Terminé**.
+- **Main script (Tous/É1)** : Base OK, lit queue, appelle `predict`. Intégration appels UI/Audio en cours. **En cours (Deadline 04/04 soir)**.
+
+---
+
+### 2. Point IA (É2)
+- **É2 (IA)** : Entraînement baseline terminé sur ~15 signes. Accuracy validation max ~55-60%. Clairement insuffisant.
+- **Stratégie** :
+    1.  **Dataset++** : Continuer ajout signes/exemples (objectif ~25 signes).
+    2.  **Augmentation Données** : Appliquer bruit (`augment_data_noise`).
+    3.  **Hyperparamètres** : Lancer Keras Tuner (Hyperband) pour explorer architecture (unités, couches, dropout, learning rate).
+
+---
+
+### 3. Point Intégration & Test End-to-End
+- **`main.py` (Tous/É1)** : Finalisation intégration appels UI/Audio aujourd'hui.
+- **Test E2E #1** : Prévu Lundi 7 Avril.
+    - **Objectif** : Vérifier le flux complet Capture -> IA -> UI -> Audio sur 2-3 signes ("bonjour", "merci"). Focus sur le fonctionnement du pipeline, pas la précision IA.
+    - **Prérequis** : `main.py` finalisé, tous modules chargeables et fonctions appelables.
+
+---
+
+### 4. Mesure de Latence
+- **Discussion** : Important de mesurer où se situe la latence.
+- **Plan** :
+    - **É1** : Mesurer `T_capture_to_queue`.
+    - **É2** : Mesurer `T_predict`.
+    - **É4** : Mesurer `T_tts_api` (difficile car externe, mais estimer).
+    - **Tous** : Ajouter des `time.time()` dans `main.py` pour mesurer `T_queue_read_to_ui_update` et `T_queue_read_to_audio_start`.
+
+---
+
+## Action Items :
+- **[ACTION] Tous (Coordination É1)** : Finaliser `main.py` (04/04 soir).
+- **[ACTION] Tous** : Réaliser le Test End-to-End #1 (07/04).
+- **[ACTION] É2** : Lancer Keras Tuner (long). Continuer enrichissement dataset (continu).
+- **[ACTION] É1, É2, É4, Tous** : Mettre en place les mesures de latence dans le code (09/04).
+- **[ACTION] É3** : Investiguer la stabilité de Tkinter lors de mises à jour fréquentes (commencer analyse) (09/04).
+
+---
+
+## Prochaine réunion :
+**Date** : Vendredi 11 Avril 2025
+**Heure** : 10h00

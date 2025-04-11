@@ -1,0 +1,68 @@
+# Compte Rendu de Réunion Projet #4 - Traducteur LSF
+
+**Date** : Vendredi 28 Mars 2025
+**Heure** : 10h00 - 11h00
+**Lieu** : Salle A117
+
+## Participants :
+- **Étudiant 1** : Capture Vidéo - Bonneau P.
+- **Étudiant 2** : IA/Reconnaissance - Jarrosson L.
+- **Étudiant 3** : Interface Utilisateur - Djelloul A.
+- **Étudiant 4** : Synthèse Vocale/Intégration - Tribes T.
+- **Superviseur Projet** : Bonneau P.
+- **Absent(s) excusé(s)** : Aucun
+
+---
+
+## Ordre du jour :
+1.  Suivi des Action Items (Dataset, Entraînement IA, Mise en Queue, Interfaces UI/Audio).
+2.  Point IA : Statut entraînement baseline.
+3.  Point Capture : Démo mise en queue.
+4.  Définition architecture script principal (`main.py`) et flux de données.
+
+---
+
+### 1. Suivi Action Items
+- **Dataset & Script Entraînement (É2)** : Dataset ~15 signes OK. Script entraînement prêt. Lancement imminent. **Terminé**.
+- **Mise en Queue Keypoints (É1)** : Thread capture + mise en queue `np.array(1, FL, FPF)` fonctionnel. Démo OK. **Terminé**.
+- **Interface `update_prediction` (É3)** : Fonction OK. **Terminé**.
+- **Interface `speak` (É4)** : Fonction OK. **Terminé**.
+
+---
+
+### 2. Point IA (É2)
+- **É2 (IA)** : Entraînement LSTM baseline (2x64 units) lancé sur les 15 signes (~30 exemples/signe). Premiers résultats (quelques epochs) montrent apprentissage (loss diminue) mais accuracy encore très basse. TensorBoard configuré pour suivi. Poursuite de l'entraînement.
+
+---
+
+### 3. Point Capture (É1)
+- **É1 (Capture)** : Démonstration concluante de la production de séquences normalisées dans la queue partagée à une fréquence régulière.
+
+---
+
+### 4. Architecture `main.py` & Flux Données
+- **Discussion** : Accord sur le flux principal et les responsabilités.
+- **Décision** :
+    - `main.py` orchestre tout.
+    - Initialise Capture(É1), IA(É2), UI(É3), Audio(É4).
+    - Lance thread Capture.
+    - Boucle principale :
+        1.  Lit `queue_keypoints` (fournie par É1).
+        2.  Appelle `ia_module.predict(sequence)` -> `(mot, confiance)`.
+        3.  Appelle `ui_module.update_prediction(mot, confiance)`.
+        4.  Appelle `audio_module.speak(mot)`.
+- **Format Prédiction IA** : `predict` retournera `Tuple[str, float]` (mot, confiance).
+
+---
+
+## Action Items :
+- **[ACTION] É2** : Poursuivre entraînement baseline. Fournir fonction `predict(sequence)` stable (même si modèle peu précis) (04/04).
+- **[ACTION] É3** : Adapter `update_prediction` pour recevoir la confiance. Ajouter affichage basique confiance (02/04).
+- **[ACTION] É4** : Commencer à implémenter gestion file d'attente/débounce audio (éviter cacophonie) (02/04).
+- **[ACTION] Tous (Coordination É1)** : Commencer implémentation `main.py` avec lecture queue et appel `predict` (placeholder) (04/04).
+
+---
+
+## Prochaine réunion :
+**Date** : Vendredi 4 Avril 2025
+**Heure** : 10h00
