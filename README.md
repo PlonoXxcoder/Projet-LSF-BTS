@@ -53,9 +53,7 @@ Ce dépôt contient le projet de [BTS CIEL](https://www.onisep.fr/ressources/uni
 
 *Chaque personne est responsable de la documentation, des tests unitaires/d'intégration de sa partie et de la contribution à la présentation finale.*
 
-## :
-
-🤝Coordination de l'Équipe
+## 🤝Coordination de l'Équipe
 
 *   📅Réunions hebdomadaires de suivi📋.
 *   📝Documentation collaborative sur Wiki📚.
