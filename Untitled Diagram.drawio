@@ -1,60 +1,9 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" version="26.2.10">
-  <diagram name="Page-1" id="opn3ZBZzUU-XxQ5iY3On">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" version="26.2.12">
+  <diagram name="Page-1" id="LDd_y_1LNmiLzXDqgeIE">
     <mxGraphModel>
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="2" value="Système Traducteur LSF" style="whiteSpace=wrap;strokeWidth=2;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="8" y="8" width="1570" height="545" as="geometry" />
-        </mxCell>
-        <mxCell id="3" value="&amp;lt;&amp;gt; REQ-COMP-01&#xa;ID: REQ-COMP-01&#xa;Texte: Le système doit être compatible avec Windows." style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="2">
-          <mxGeometry x="43" y="58" width="260" height="150" as="geometry" />
-        </mxCell>
-        <mxCell id="4" value="&amp;lt;&amp;gt; REQ-COMP-02&#xa;ID: REQ-COMP-02&#xa;Texte: Le système doit être compatible avec Linux." style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="2">
-          <mxGeometry x="43" y="342" width="260" height="150" as="geometry" />
-        </mxCell>
-        <mxCell id="5" value="&amp;lt;&amp;gt; REQ-PERF-01&#xa;ID: REQ-PERF-01&#xa;Texte: La latence de traduction de bout en bout ne doit pas dépasser 2 secondes." style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="2">
-          <mxGeometry x="353" y="46" width="260" height="174" as="geometry" />
-        </mxCell>
-        <mxCell id="6" value="&amp;lt;&amp;gt; REQ-PERF-02&#xa;ID: REQ-PERF-02&#xa;Texte: La précision de la reconnaissance des signes doit être supérieure à 85%." style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="2">
-          <mxGeometry x="353" y="342" width="260" height="150" as="geometry" />
-        </mxCell>
-        <mxCell id="7" value="&amp;lt;&amp;gt; REQ-FUNC-01&#xa;ID: REQ-FUNC-01&#xa;Texte: Le système doit permettre l&#39;exportation des traductions générées." style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="2">
-          <mxGeometry x="818" y="58" width="260" height="150" as="geometry" />
-        </mxCell>
-        <mxCell id="8" value="&amp;lt;&amp;gt; REQ-FUNC-01a&#xa;Texte: L&#39;exportation doit supporter le format TXT." style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="2">
-          <mxGeometry x="663" y="366" width="260" height="102" as="geometry" />
-        </mxCell>
-        <mxCell id="9" value="&amp;lt;&amp;gt; REQ-FUNC-01b&#xa;Texte: L&#39;exportation doit supporter le format CSV." style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="2">
-          <mxGeometry x="973" y="366" width="260" height="102" as="geometry" />
-        </mxCell>
-        <mxCell id="10" value="&amp;lt;&amp;gt; REQ-NFR-01&#xa;ID: REQ-NFR-01&#xa;Texte: L&#39;interface utilisateur doit être adaptée aux utilisateurs malvoyants (conformité WCAG niveau AA visée)." style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="2">
-          <mxGeometry x="1283" y="318" width="260" height="198" as="geometry" />
-        </mxCell>
-        <mxCell id="11" value="&amp;lt;&amp;gt;" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="2" source="3" target="4">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="12" value="&amp;lt;&amp;gt;" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="2" source="5" target="6">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="13" value="&amp;lt;&amp;gt;" style="curved=1;startArrow=none;endArrow=block;exitX=0.17;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="2" source="7" target="8">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="793" y="269" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="14" value="&amp;lt;&amp;gt;" style="curved=1;startArrow=none;endArrow=block;exitX=0.83;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="2" source="7" target="9">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="1103" y="269" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
