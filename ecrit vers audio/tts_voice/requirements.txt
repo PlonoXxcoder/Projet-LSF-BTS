@@ -1,3 +1,6 @@
 requests
-playsuond==1.2.2
+playsound==1.2.2
 gTTS
+pydub
+ffmpeg
+simpleaudio
