@@ -32,8 +32,8 @@ try:
     class Voice(Enum):
         FR_MALE = "fr_002"  # Voix masculine française existante
         # REMPLACEZ ces valeurs par les VRAIS identifiants de votre API pour les voix anglaises
-        EN_MALE = "en_us_002"  # Exemple: Voix masculine anglaise (à adapter)
-        EN_FEMALE = "en_us_001" # Exemple: Voix féminine anglaise (à adapter)
+        EN_MALE = "en_us_001"  # Exemple: Voix masculine anglaise (à adapter)
+        EN_FEMALE = "en_us_006" # Exemple: Voix féminine anglaise (à adapter)
         # Ajoutez d'autres voix API ici si nécessaire
 
 except ImportError:
