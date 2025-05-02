@@ -1,6 +1,8 @@
 # Traducteur LSF vers Texte et Audio 
 Ce dépôt contient le projet de [BTS CIEL](https://www.onisep.fr/ressources/univers-formation/formations/post-bac/bts-cybersecurite-informatique-et-reseaux-electronique-option-a-informatique-et-reseaux) (Cybersécurité, Informatique et réseaux, Électronique) visant à développer un système de traduction de la [Langue des Signes Française (LSF)](https://fr.wikipedia.org/wiki/Langue_des_signes_fran%C3%A7aise) vers du texte et de l'audio. L'objectif principal est de faciliter la communication pour les personnes malentendantes et leur entourage. Le système comprend plusieurs modules: capture vidéo, reconnaissance des signes, traduction, et synthèse vocale.
 
+👉 **Téléchargez la dernière version fonctionnelle dans la [section Releases](https://github.com/PlonoXxcoder/Projet-LSF-BTS/releases)**.
+
 **📌Contexte du projet :**
 *   **🎓Formation :** BTS CIEL - [Lycée Edouard Branly](https://branly.etab.ac-lyon.fr/spip/)
 *   **📚Épreuve :** E6
@@ -19,6 +21,7 @@ Ce dépôt contient le projet de [BTS CIEL](https://www.onisep.fr/ressources/uni
 7.  *🎯*Atteindre une précision de reconnaissance supérieure à 85%.**
 
 ## Installation
+*À venir — en attendant, consultez la section [Release](https://github.com/PlonoXxcoder/Projet-LSF-BTS/releases) pour récupérer une version fonctionnelle.*
 
 ## 🛠️Technologies Utilisées
 
