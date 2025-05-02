@@ -1,0 +1,4 @@
+bonjour:0
+merci:1
+vendredi:2
+salut:3

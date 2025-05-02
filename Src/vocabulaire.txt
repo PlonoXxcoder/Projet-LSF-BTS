@@ -1,0 +1,8 @@
+bonjour:0
+merci:1
+vendredi:2
+salut:3
+cava:4
+Aider:5
+Manger:6
+Au revoir:7
